@@ -84,7 +84,8 @@ if st.button("Build Model"):
             sources= chunks[1]
             
             my_bar.progress(75, text="Building QnA model.")
-            embeddings=OpenAIEmbeddings(openai_api_key=st.secrets["openai_api_key"])
+           # embeddings=OpenAIEmbeddings(openai_api_key=st.secrets["openai_api_key"])
+            embeddings=OpenAIEmbeddings(openai_api_key=openai_api_key)
             #vstore with metadata . Here we will store locations
             vStore=Chroma.from_texts(documents, embeddings, metadatas=[{"source": s} for s in sources])
             
@@ -93,7 +94,8 @@ if st.button("Build Model"):
             
             retriever=vStore.as_retriever()
             retriever.search_kwargs={'k':2}
-            llm=OpenAI(model_name=model_name, open_api_key=st.secrets["openai_api_key"])
+            #llm=OpenAI(model_name=model_name, open_api_key=st.secrets["openai_api_key"])
+            llm=OpenAI(model_name=model_name, open_api_key=openai_api_key)
             model=RetrievalQAWithSourcesChain.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
             
             my_bar.progress(100, text="Model is ready.")
