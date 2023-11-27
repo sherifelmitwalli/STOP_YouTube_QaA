@@ -1,6 +1,6 @@
 streamlit
 pytube
-openai
+openai==0.28
 chromadb
 tiktoken
 langchain== 0.0.341
