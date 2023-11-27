@@ -91,7 +91,7 @@ if st.button("Build Model"):
             vStore=Chroma.from_texts(documents, embeddings, metadatas=[{"source": s} for s in sources])
             
             #decidong model
-            model_name="gpt-3.5-turbo-1106"
+            model_name="text-davinci-003"
             
             retriever=vStore.as_retriever()
             retriever.search_kwargs={'k':2}
