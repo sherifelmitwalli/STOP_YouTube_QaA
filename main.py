@@ -15,6 +15,7 @@ from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesCha
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 import pandas as pd
+openai_api_key= "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"
 
 
 st.set_page_config(layout="centered", page_title="YouTube QnA")
