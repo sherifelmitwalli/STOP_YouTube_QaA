@@ -108,23 +108,29 @@ if st.button("Build Model"):
             st.error(f"An error occured: {e}")
             st.error('oops, crawling resulted in an error :(please try again with a different URL.')
 
-    if site and ("crawling" in state):
-        st.header("Ask your data")
-        model=st.session_state['model']
-        site=st.session_state['site']
-        st.video(site, format="video/mp4", start_time=0)
-        user_q=st.text_input("Enter your question Here")
-        if st.button("Get Response"):
-            try:
-                with st.spinner("model is working on it ..."):
-                    result = model({"question":user_q}, return_only_outputs=True)
-                    st.subheader('Your response:')
-                    st.write(result["answer"])
-                    st.subheader("sources:")
-                    st.write(result["sources"])
-            except Exception as e:
-                st.error(f"Am error occured: {e}")
-                st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
+if site and ("crawling" in state):
+    st.header("Ask your data")
+    model = st.session_state['model']
+    site = st.session_state['site']
+    
+    st.video(site, format="video/mp4", start_time=0)
+    
+    user_q = st.text_input("Enter your question Here")
+    
+    if st.button("Get Response"):
+        try:
+            with st.spinner("model is working on it ..."):
+                result = model({"question":user_q}, return_only_outputs=True)
+            
+            st.subheader('Your response:') 
+            st.write(result["answer"])
+            
+            st.subheader("sources:")
+            st.write(result["sources"])
+            
+        except Exception as e:
+            st.error(f"An error occured: {e}")
+            st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
                 
 
                     
