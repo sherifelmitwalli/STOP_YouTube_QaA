@@ -19,21 +19,20 @@ import pandas as pd
 
 st.set_page_config(layout="centered", page_title="YouTube QnA")
 
-# Header of the application 
+# Header of the application
 image = Image.open('STOP_logo.png')  
 
-col1, col2 = st.columns([3, 5])
+col1, col2 = st.columns([3, 5]) 
 with col1:
+    st.markdown("")
     st.markdown("") 
     st.markdown("")
-    st.image(image, width=150)
-with col2: 
+    st.image(image, width=200) 
+with col2:
     st.header('Tobacco Control Research Group', anchor=None)
     st.subheader('Stopping tobacco consumption and related issues.')
     
 st.write('''---''')
-
-  
 
 
 def extract_and_save_audio(video_URL, destination, final_filename):
