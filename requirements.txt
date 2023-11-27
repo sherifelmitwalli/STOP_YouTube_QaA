@@ -1,0 +1,11 @@
+streamlit
+pytube
+openai
+chromadb
+tiktoken
+langchain
+typing-inspect==0.8.0
+typing_extensions==4.5.0
+pandas
+openai.whisper
+pysqlite3.binary
