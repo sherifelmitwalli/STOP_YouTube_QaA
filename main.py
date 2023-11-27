@@ -11,7 +11,7 @@ from pytube import YouTube
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DataFrameLoader
 from langchain.vectorstores import Chroma
-from langchain.Chains import retrievalQAWithSourcesChain
+from langchain.Chains import RetrievalQAWithSourcesChain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 import pandas as pd
