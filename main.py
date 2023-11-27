@@ -20,18 +20,19 @@ import pandas as pd
 
 
 
-st.set_page_config(layout="centered", page_title="YouTube QnA")
+st.set_page_config(layout="centered", page_title="YouTube QnA")  
 
-# Header of the application  
-image = Image.open('STOP_logo.png')
+# Header of the application
+image = Image.open('STOP_logo.png')  
 
-col1, col2 = st.columns([1,4]) 
-with col1: 
-    st.image(image, width=100)
+col1, col2 = st.columns([3, 5])
+with col1:
+    st.image(image, width=150) 
 with col2:
-    st.header('Tobacco Control Research Group', anchor=None)
+    st.header('Tobacco Control Research Group', anchor=None) 
+    st.subheader('Stopping tobacco consumption and related issues.')
     
-st.write('''---''') # horizontal separator line
+st.write('''---''')
   
 
 
