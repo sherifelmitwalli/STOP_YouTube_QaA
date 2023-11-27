@@ -9,4 +9,3 @@ typing_extensions==4.5.0
 pandas
 openai.whisper
 pysqlite3.binary
-python-dotenv
