@@ -13,9 +13,9 @@ from langchain.document_loaders import DataFrameLoader
 from langchain.vectorstores import Chroma
 from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
 from langchain.embeddings.openai import OpenAIEmbeddings
-#from langchain.llms import OpenAI
+from langchain.llms import OpenAI
 import pandas as pd
-from openai import OpenAI
+
 
 
 st.set_page_config(layout="centered", page_title="YouTube QnA")
@@ -91,7 +91,7 @@ if st.button("Build Model"):
             vStore=Chroma.from_texts(documents, embeddings, metadatas=[{"source": s} for s in sources])
             
             #decidong model
-            model_name="gpt-3.5-turbo"
+            model_name="gpt-3.5-turbo-1106"
             
             retriever=vStore.as_retriever()
             retriever.search_kwargs={'k':2}
