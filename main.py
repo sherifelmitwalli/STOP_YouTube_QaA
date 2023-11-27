@@ -18,17 +18,19 @@ import pandas as pd
 
 
 
-st.set_page_config(layout="centered", page_title="YouTube QnA")
 
-#header of the application
-image=Image.open('STOP_logo.png')
+st.set_page_config(layout="centered", page_title="YouTube QnA") 
 
-#col1, mid, col2 = st.columns([1, 2, 20])
-#with col1:
-    #st.Image(image, width=80)
-#with col2:
-#    st.header('Tobacco Control Research Group')
-st.write("...") # horizontal separator line
+# Header of the application
+image = Image.open('STOP_logo.png')
+
+col1, mid, col2 = st.columns([1, 2, 20])
+with col1: 
+    st.image(image, width=80)
+with col2:
+    st.header('Tobacco Control Research Group')
+    
+st.write('''---''') # horizontal separator line
 
 def extract_and_save_audio(video_URL, destination, final_filename):
     video=YouTube(video_URL) #get video
