@@ -99,7 +99,7 @@ if st.button("Build Model"):
             extract_and_save_audio(video_URL, destination, final_filename)
             
             # run the whisper model
-            audio_file=data_dir+"TCRG.mp3"
+            audio_file=destination+'TCRG.mp3'
             my_bar.progress(50, text="Transcripting the video.")
             result=whisper_model.transcribe(audio_file, fp16=False, language='English')
             
