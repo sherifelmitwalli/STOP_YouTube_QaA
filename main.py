@@ -40,6 +40,8 @@ import shutil
 def extract_and_save_audio(video_URL, destination, final_filename):
     video=YouTube(video_URL) #get video
     audio=video.streams.filter(only_audio=True).first() #separate audio
+    if os.path.exists(final_filename):
+        os.remove(final_filename)
     output = audio.download(output_path=destination, filename=final_filename) #download and save transcription
     _, ext=os.path.splitext(output)
     new_file=final_filename+ '.mp3'
