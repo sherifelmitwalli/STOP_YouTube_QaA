@@ -42,10 +42,11 @@ def extract_and_save_audio(video_URL, destination, final_filename):
     audio = video.streams.filter(only_audio=True).first()  # separate audio
     output = audio.download(output_path=destination)  # download and save transcription
     _, ext = os.path.splitext(output)
+    
     new_file = final_filename + '.mp3'
     
     # Remove the existing file if it exists
-    if os.path.exists(new_file):
+    if os.output_path.exists(new_file):
         os.remove(new_file)
 
     os.rename(output, new_file)
