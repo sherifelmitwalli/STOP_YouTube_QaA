@@ -37,15 +37,35 @@ st.write('''---''')
 import os
 import shutil
 
+import os
+import shutil
+
+# Get the root dir path  
+root_dir = os.path.dirname(os.path.realpath(__file__))  
+
+# Path for new folder
+data_dir = os.path.join(root_dir, "data")
+
+# Create folder if it doesn't exist
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
+    
 def extract_and_save_audio(video_URL, destination, final_filename):
+    root_dir = os.path.dirname(os.path.realpath(__file__))
+    data_dir = os.path.join(root_dir, "data")
+    if os.path.exists(data_dir):
+        # Loop through and delete all files in dir
+        for filename in os.listdir(data_dir):
+            file_path = os.path.join(data_dir, filename)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
     video=YouTube(video_URL) #get video
     audio=video.streams.filter(only_audio=True).first() #separate audio
-    if os.path.exists(final_filename):
-        os.remove(final_filename)
-    output = audio.download(output_path=destination, filename=final_filename) #download and save transcription
+    output=audio.download(output_path=destination) #download and save transcription
     _, ext=os.path.splitext(output)
     new_file=final_filename+ '.mp3'
-    shutil.move(output, new_file)
+    os.rename(output, new_file)
+    
     
 def chunk_clips(transcription, clip_size):
     texts=[]
@@ -78,7 +98,7 @@ if st.button("Build Model"):
             
             #video to audio
             video_URL=site
-            destination="."
+            destination=".\data"
             final_filename="TCRG"
             extract_and_save_audio(video_URL, destination, final_filename)
             
