@@ -38,18 +38,16 @@ st.write('''---''')
 import os
 
 def extract_and_save_audio(video_URL, destination, final_filename):
-    video = YouTube(video_URL)  # get video
-    audio = video.streams.filter(only_audio=True).first()  # separate audio
-    output = audio.download(output_path=destination)  # download and save transcription
-    _, ext = os.path.splitext(output)
-    
-    new_file = final_filename + '.mp3'
-    
-    # Remove the existing file if it exists
-    if os.path.exists(new_file):
-        os.remove(new_file)
 
-    os.rename(output, new_file)
+    video = YouTube(video_URL)  
+    audio = video.streams.filter(only_audio=True).first()
+
+    # Overwrite existing file
+    output_path = os.path.join(destination, final_filename + ".mp3")
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
+    audio.download(output_path=destination, filename=final_filename + ".mp3")
     
 def chunk_clips(transcription, clip_size):
     texts=[]
