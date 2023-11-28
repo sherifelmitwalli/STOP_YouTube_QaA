@@ -46,7 +46,7 @@ def extract_and_save_audio(video_URL, destination, final_filename):
     new_file = final_filename + '.mp3'
     
     # Remove the existing file if it exists
-    if os.output_path.exists(new_file):
+    if os.path.exists(new_file):
         os.remove(new_file)
 
     os.rename(output, new_file)
