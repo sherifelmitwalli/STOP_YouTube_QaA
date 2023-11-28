@@ -104,7 +104,7 @@ if st.button("Build Model"):
             
 
             # Constructing the full path
-            full_audio_file_path = os.path.join(destination, audio_file)
+            full_audio_file_path = destination +'/'+ audio_file
             
             my_bar.progress(50, text="Transcripting the video.")
             result=whisper_model.transcribe(full_audio_file_path, fp16=False, language='English')
