@@ -146,6 +146,9 @@ if site and ("crawling" in state):
         except Exception as e:
             st.error(f"An error occured: {e}")
             st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
+# Add a button to clear uploaded files
+if st.button('Clear Uploaded Files') and st.session_state.uploaded_files:
+    clear_uploaded_files()
                 
 
                     
