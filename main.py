@@ -37,24 +37,10 @@ st.write('''---''')
 
 import shutil
 
-# Get the root dir path  
-root_dir = os.path.dirname(os.path.realpath(__file__))  
 
-# Path for new folder
-data_dir = os.path.join(root_dir, "data")
-
-# Create folder if it doesn't exist
-if not os.path.exists(data_dir):
-    os.makedirs(data_dir)
     
 def extract_and_save_audio(video_URL, destination, final_filename):
 
-    if os.path.exists(data_dir):
-        # Loop through and delete all files in dir
-        for filename in os.listdir(data_dir):
-            file_path = os.path.join(data_dir, filename)
-            if os.path.isfile(file_path):
-                os.remove(file_path)
     video=YouTube(video_URL) #get video
     audio=video.streams.filter(only_audio=True).first() #separate audio
     output=audio.download(output_path=destination) #download and save transcription
@@ -94,29 +80,12 @@ if st.button("Build Model"):
             
             #video to audio
             video_URL=site
-            destination=data_dir
+            destination="."
             final_filename="TCRG"
 
             extract_and_save_audio(video_URL, destination, final_filename)
 
-            import shutil
-            # Directory where the file is locate
-            source_directory = data_dir
-
-            # Name of the file to be copied
-            file_name = "TCRG.mp3"   
-
-            # Full path of the source file
-            source_file_path = os.path.join(source_directory, file_name)
-
-            # Destination directory (root in this case)
-            destination_directory = "."
-
-            # Full path of the destination file
-            destination_file_path = os.path.join(destination_directory, file_name)
-
-            # Copying the file
-            shutil.copy(source_file_path, destination_file_path)
+    
             
             # run the whisper model
             audio_file="TCRG.mp3"         
