@@ -34,10 +34,7 @@ with col2:
     
 st.write('''---''')
 
-import os
-import shutil
 
-import os
 import shutil
 
 # Get the root dir path  
@@ -51,8 +48,7 @@ if not os.path.exists(data_dir):
     os.makedirs(data_dir)
     
 def extract_and_save_audio(video_URL, destination, final_filename):
-    root_dir = os.path.dirname(os.path.realpath(__file__))
-    data_dir = os.path.join(root_dir, "data")
+
     if os.path.exists(data_dir):
         # Loop through and delete all files in dir
         for filename in os.listdir(data_dir):
@@ -98,7 +94,7 @@ if st.button("Build Model"):
             
             #video to audio
             video_URL=site
-            destination=".\data"
+            destination=data_dir
             final_filename="TCRG"
             extract_and_save_audio(video_URL, destination, final_filename)
             
