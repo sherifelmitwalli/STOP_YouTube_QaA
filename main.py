@@ -99,9 +99,15 @@ if st.button("Build Model"):
             extract_and_save_audio(video_URL, destination, final_filename)
             
             # run the whisper model
-            audio_file=destination+'TCRG.mp3'
+            audio_file="TCRG.mp3"
+
+            
+
+            # Constructing the full path
+            full_audio_file_path = os.path.join(destination, audio_file)
+            
             my_bar.progress(50, text="Transcripting the video.")
-            result=whisper_model.transcribe(audio_file, fp16=False, language='English')
+            result=whisper_model.transcribe(full_audio_file_path, fp16=False, language='English')
             
             transcription=pd.DataFrame(result['segments'])
             
