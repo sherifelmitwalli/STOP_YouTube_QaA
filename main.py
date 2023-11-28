@@ -146,12 +146,28 @@ if site and ("crawling" in state):
         except Exception as e:
             st.error(f"An error occured: {e}")
             st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
+
+
+if 'uploaded_files' not in st.session_state:
+    st.session_state.uploaded_files = []
+
+# Add a file uploader
+uploaded_files = st.file_uploader("Upload Files", accept_multiple_files=True, key='upload')
+
+# Check if files are uploaded
+if uploaded_files:
+    st.write("Files Uploaded!")
+    st.session_state.uploaded_files.extend(uploaded_files)
+
 # Add a button to clear uploaded files
 if st.button('Clear Uploaded Files') and st.session_state.uploaded_files:
     clear_uploaded_files()
-                
 
-                    
+# Display the uploaded files
+if st.session_state.uploaded_files:
+    st.write("Uploaded Files:")
+    for file in st.session_state.uploaded_files:
+        st.write(file.name)
                                      
                                      
                                      
