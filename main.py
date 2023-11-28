@@ -147,10 +147,6 @@ if site and ("crawling" in state):
             st.error(f"An error occured: {e}")
             st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
 
-# Add a button to clear uploaded files
-if st.button('Clear Uploaded Files'):
-    st.experimental_rerun()
-
 
 
                                      
