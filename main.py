@@ -37,8 +37,6 @@ st.write('''---''')
 
 import shutil
 
-session_files_dir = "/app/session_files"
-
 
 
 
@@ -51,18 +49,6 @@ def extract_and_save_audio(video_URL, destination, final_filename):
     new_file=final_filename+ '.mp3'
     os.rename(output, new_file)
 
-def save_audio(url):
-    yt = YouTube(url)
-    try:
-        video = yt.streams.filter(only_audio=True).first()
-        out_file = video.download()
-    except:
-        return None, None, None
-    base, ext = os.path.splitext(out_file)
-    file_name = base + '.mp3'
-    os.rename(out_file, file_name)
-   
-    return file_name
 
     
 def chunk_clips(transcription, clip_size):
@@ -96,9 +82,6 @@ if st.button("Build Model"):
             whisper_model=whisper.load_model("base", device=device)
             
 
-
-
-
             #video to audio
             video_URL=site
             destination="."
@@ -106,11 +89,7 @@ if st.button("Build Model"):
             extract_and_save_audio(video_URL, destination, final_filename)
             # run the whisper model
             audio_file="TCRG.mp3"        
-            # run the whisper model
-
-            #audio_file=save_audio(video_URL)   
-
-            
+           
            
             my_bar.progress(50, text="Transcripting the video.")
             result=whisper_model.transcribe(audio_file, fp16=False, language='English')
