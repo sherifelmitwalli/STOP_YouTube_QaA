@@ -42,6 +42,9 @@ import shutil
 
 
 def extract_and_save_audio(video_URL, destination, final_filename):
+    # Check if the file exists and remove it
+
+
     video=YouTube(video_URL) #get video
     audio=video.streams.filter(only_audio=True).first() #separate audio
     output=audio.download(output_path=destination) #download and save transcription
@@ -87,9 +90,14 @@ if st.button("Build Model"):
             video_URL=site
             destination="."
             final_filename="TCRG"
+            # Check if the file exists and remove it
+            audio_file="TCRG.mp3"
+            if os.path.exists(audio_file):
+                os.remove(audio_file)
+
             extract_and_save_audio(video_URL, destination, final_filename)
             # run the whisper model
-            audio_file="TCRG.mp3"        
+            #audio_file="TCRG.mp3"        
            
            
             my_bar.progress(50, text="Transcripting the video.")
