@@ -83,9 +83,7 @@ st.header("YouTube Question Answering Bot")
 state=st.session_state
 site=st.text_input("Enter your URL here")
 if st.button("Build Model"):
-    # Clear existing files
-    for file in os.listdir(session_files_dir):
-        os.remove(os.path.join(session_files_dir, file))
+
     if site is None:
         st.info(f"""Enter URL to Build QnA Bot""")
     elif site:
@@ -103,7 +101,7 @@ if st.button("Build Model"):
 
             #video to audio
             video_URL=site
-            destination=session_files_dir
+            destination="."
             final_filename="TCRG"
             extract_and_save_audio(video_URL, destination, final_filename)
             
