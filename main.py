@@ -107,7 +107,7 @@ if st.button("Build Model"):
             
             # run the whisper model
 
-            audio_file=save_audio(video_URL)   
+            #audio_file=save_audio(video_URL)   
 
             
            
