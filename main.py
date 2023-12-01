@@ -104,7 +104,8 @@ if st.button("Build Model"):
             destination="."
             final_filename="TCRG"
             extract_and_save_audio(video_URL, destination, final_filename)
-            
+            # run the whisper model
+            audio_file="TCRG.mp3"        
             # run the whisper model
 
             #audio_file=save_audio(video_URL)   
