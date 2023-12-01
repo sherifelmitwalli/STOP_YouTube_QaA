@@ -40,7 +40,7 @@ import shutil
 
     
 
-def save_audio(url):
+def save_audio2(url):
     yt = YouTube(url)
     try:
         video = yt.streams.filter(only_audio=True).first()
@@ -52,7 +52,20 @@ def save_audio(url):
     os.rename(out_file, file_name)
    
     return file_name
+
+import uuid
+
+def save_audio(yt, file_uid=None):
+    video = yt.streams.filter(only_audio=True).first() 
     
+    if file_uid is None:
+        file_uid = uuid.uuid4().hex[:6]
+        
+    filename = f"{file_uid}-{yt.title}.mp3"
+    
+    out_file = video.download(filename=filename)
+
+    return out_file
     
 def chunk_clips(transcription, clip_size):
     texts=[]
@@ -92,7 +105,10 @@ if st.button("Build Model"):
             
             # run the whisper model
 
-            audio_file=save_audio(video_URL)   
+            #audio_file=save_audio(video_URL)   
+
+            yt = YouTube( video_URL)
+            audio_file = save_audio(yt) 
            
             my_bar.progress(50, text="Transcripting the video.")
             result=whisper_model.transcribe(audio_file, fp16=False, language='English')
