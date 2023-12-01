@@ -37,10 +37,21 @@ st.write('''---''')
 
 import shutil
 
+session_files_dir = "/app/session_files"
 
-    
 
-def save_audio2(url):
+
+
+
+def extract_and_save_audio(video_URL, destination, final_filename):
+    video=YouTube(video_URL) #get video
+    audio=video.streams.filter(only_audio=True).first() #separate audio
+    output=audio.download(output_path=destination) #download and save transcription
+    _, ext=os.path.splitext(output)
+    new_file=final_filename+ '.mp3'
+    os.rename(output, new_file)
+
+def save_audio(url):
     yt = YouTube(url)
     try:
         video = yt.streams.filter(only_audio=True).first()
@@ -53,19 +64,6 @@ def save_audio2(url):
    
     return file_name
 
-import uuid
-
-def save_audio(yt, file_uid=None):
-    video = yt.streams.filter(only_audio=True).first() 
-    
-    if file_uid is None:
-        file_uid = uuid.uuid4().hex[:6]
-        
-    filename = f"{file_uid}-{yt.title}.mp3"
-    
-    out_file = video.download(filename=filename)
-
-    return out_file
     
 def chunk_clips(transcription, clip_size):
     texts=[]
@@ -85,6 +83,9 @@ st.header("YouTube Question Answering Bot")
 state=st.session_state
 site=st.text_input("Enter your URL here")
 if st.button("Build Model"):
+    # Clear existing files
+    for file in os.listdir(session_files_dir):
+        os.remove(os.path.join(session_files_dir, file))
     if site is None:
         st.info(f"""Enter URL to Build QnA Bot""")
     elif site:
@@ -96,19 +97,21 @@ if st.button("Build Model"):
             #Load the model
             whisper_model=whisper.load_model("base", device=device)
             
+
+
+
+
             #video to audio
             video_URL=site
-
-
-
-    
+            destination=session_files_dir
+            final_filename="TCRG"
+            extract_and_save_audio(video_URL, destination, final_filename)
             
             # run the whisper model
 
-            #audio_file=save_audio(video_URL)   
+            audio_file=save_audio(video_URL)   
 
-            yt = YouTube( video_URL)
-            audio_file = save_audio(yt) 
+            
            
             my_bar.progress(50, text="Transcripting the video.")
             result=whisper_model.transcribe(audio_file, fp16=False, language='English')
