@@ -69,7 +69,8 @@ st.header("YouTube Question Answering Bot")
 state=st.session_state
 site=st.text_input("Enter your URL here")
 if st.button("Build Model"):
-
+    # Clear the st.session_state dictionary
+    st.session_state = {}
     if site is None:
         st.info(f"""Enter URL to Build QnA Bot""")
     elif site:
