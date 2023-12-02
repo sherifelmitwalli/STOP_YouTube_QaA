@@ -75,6 +75,8 @@ state=st.session_state
 site=st.text_input("Enter your URL here")
 if st.button("Build Model"):
     # Clear the st.session_state dictionary
+    print(st.session_state)  # Print the entire session state
+    print(st.session_state.keys())  # Print the keys in session state
     # Clear the Chroma vector store
     if st.session_state.get('vStore') is not None:
         print("vStore found in session state. Clearing...")
