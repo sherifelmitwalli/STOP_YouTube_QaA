@@ -50,6 +50,8 @@ def extract_and_save_audio(video_URL, destination, final_filename):
     output=audio.download(output_path=destination) #download and save transcription
     _, ext=os.path.splitext(output)
     new_file=final_filename+ '.mp3'
+    if os.path.exists(new_file):
+        os.remove(new_file)
     os.rename(output, new_file)
 
 
