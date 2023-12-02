@@ -77,7 +77,9 @@ if st.button("Build Model"):
     # Clear the st.session_state dictionary
     # Clear the Chroma vector store
     if 'vStore' in st.session_state:
+        print("vStore found in session state. Clearing...")
         del st.session_state['vStore']
+        print("vStore cleared.")
 
     if site is None:
         st.info(f"""Enter URL to Build QnA Bot""")
