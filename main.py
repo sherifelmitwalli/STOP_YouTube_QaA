@@ -94,8 +94,7 @@ if st.button("Build Model"):
             final_filename="TCRG"
             # Check if the file exists and remove it
             audio_file="TCRG.mp3"
-            if os.path.exists(audio_file):
-                os.remove(audio_file)
+
 
             extract_and_save_audio(video_URL, destination, final_filename)
             # run the whisper model
