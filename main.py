@@ -35,7 +35,8 @@ with col2:
 st.write('''---''')
 
 
-import shutil
+print(st.session_state)  # Print the entire session state
+print(st.session_state.keys())  # Print the keys in session state
 
 
 
