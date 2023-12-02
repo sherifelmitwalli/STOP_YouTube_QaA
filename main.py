@@ -75,6 +75,9 @@ state=st.session_state
 site=st.text_input("Enter your URL here")
 if st.button("Build Model"):
     # Clear the st.session_state dictionary
+    # Clear the Chroma vector store
+    if 'vStore' in st.session_state:
+        del st.session_state['vStore']
 
     if site is None:
         st.info(f"""Enter URL to Build QnA Bot""")
@@ -114,7 +117,11 @@ if st.button("Build Model"):
             embeddings=OpenAIEmbeddings(openai_api_key=st.secrets["OPENAI_API_KEY"])
             
             #vstore with metadata . Here we will store locations
-            vStore=Chroma.from_texts(documents, embeddings, metadatas=[{"source": s} for s in sources])
+            if 'vStore' not in st.session_state:
+                vStore = Chroma.from_texts(documents, embeddings, metadatas=[{"source": s} for s in sources])
+                st.session_state['vStore'] = vStore
+
+   
             
             #decidong model
             model_name="text-davinci-003"
