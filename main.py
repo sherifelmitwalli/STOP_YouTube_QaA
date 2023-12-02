@@ -30,7 +30,7 @@ with col1:
     st.image(image, width=200) 
 with col2:
     st.header('Tobacco Control Research Group', anchor=None)
-    st.subheader('Stopping tobacco consumption and related issues.')
+    st.subheader('Refresh the page if you want individual YouTube videos.')
     
 st.write('''---''')
 
